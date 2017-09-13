@@ -12,7 +12,7 @@
         <div class="col-md-12 text-center">
             <h1 class="post-title">Learning Laravel</h1>
             <p>This blog post will get you right on track with Laravel!</p>
-            <p><a href="#">Read more...</a></p>
+            <p><a href="{{ route('blog.post', ['id' => 1])  }}">Read more...</a></p>
         </div>
     </div>
     <hr>
@@ -20,7 +20,7 @@
         <div class="col-md-12 text-center">
             <h1 class="post-title">The next steps</h1>
             <p>Understanding the Basisc is great, but you need to be able to make the next steps.</p>
-            <p><a href="#">Read more...</a></p>
+            <p><a href="{{ route('blog.post', ['id' => 1])  }}">Read more...</a></p>
         </div>
     </div>
     <hr>
@@ -29,7 +29,7 @@
             <h1 class="post-title">Laravel 5.3</h1>
             <p>Though announced as a "minor release", Laravel 5.3 ships with some very interesting additions and
             features</p>
-            <p><a href="#">Read more...</a></p>
+            <p><a href="{{ route('blog.post', ['id' => 1])  }}">Read more...</a></p>
         </div>
     </div>
 @endsection
