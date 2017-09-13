@@ -22,3 +22,15 @@ Route::get('post/{id}', function () {
 Route::get('about', function () {
     return view('other.about');
 });
+
+Route::get('admin', function () {
+    return view('admin.index');
+});
+
+Route::get('admin/create', function () {
+    return view('admin.create');
+});
+
+Route::get('admin/edit/{id}', function () {
+    return view('admin.edit');
+});
