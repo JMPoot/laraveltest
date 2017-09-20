@@ -36,13 +36,15 @@ Route::get('about', function () {
 })->name('other.about');
 
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('', function () {
-        return view('admin.index');
-    })->name('admin.index');
+    Route::get('', [
+        'uses' => 'PostController@getAdminIndex',
+        'as' => 'admin.index'
+    ]);
 
-    Route::get('create', function () {
-        return view('admin.create');
-    })->name('admin.create');
+    Route::get('create', [
+        'uses' => 'PostController@getAdminCreate',
+        'as' => 'admin.create'
+    ]);
 
     Route::post('create', function (\Illuminate\Http\Request $request,
         Illuminate\Validation\Factory $validator) {
@@ -59,6 +61,7 @@ Route::group(['prefix' => 'admin'], function () {
     })->name('admin.create');
 
     Route::get('edit/{id}', function ($id) {
+
         if ($id == 1) {
             $post = [
                 'title' => 'Learning Laravel',
