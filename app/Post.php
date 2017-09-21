@@ -1,8 +1,9 @@
 <?php
 
 namespace App;
+use Illuminate\Database\Eloquent\Model;
 
-class Post {
+class Post extends Model {
     public function getPosts($session) {
         if (!$session->has('posts')) {
             $this->createDummyData($session);
