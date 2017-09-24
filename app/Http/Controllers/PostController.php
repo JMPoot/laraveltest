@@ -5,21 +5,19 @@ namespace App\Http\Controllers;
 use App\Post;
 use Illuminate\Http\Request;
 
-use Illuminate\Session\Store;
-
 class PostController extends Controller
 {
-    public function getIndex(Store $session) {
-        $posts = Post::all();
+    public function getIndex() {
+        $posts = Post::orderBy('created_at','desc')->get();
         return view('blog.index', ['posts' => $posts]);
     }
 
-    public function getAdminIndex(Store $session) {
-        $posts = Post::all();
+    public function getAdminIndex() {
+        $posts = Post::orderBy('title', 'asc')->get();
         return view('admin.index', ['posts' => $posts]);
     }
 
-    public function getPost(Store $session, $id) {
+    public function getPost($id) {
         $post = Post::find($id);
         return view('blog.post', ['post' => $post]);
     }
@@ -28,7 +26,7 @@ class PostController extends Controller
         return view('admin.create');
     }
 
-    public function postAdminCreate(Store $session, Request $request) {
+    public function postAdminCreate(Request $request) {
         $this->validate($request, [
             'title' => 'required|min:5',
             'content' => 'required|min:10'
@@ -44,12 +42,12 @@ class PostController extends Controller
             . $request->input('title'));
     }
 
-    public function getAdminEdit(Store $session, $id) {
+    public function getAdminEdit($id) {
         $post = Post::find($id);
         return view('admin.edit', ['post' => $post, 'postId' => $id]);
     }
 
-    public function postAdminEdit(Store $session, Request $request) {
+    public function postAdminEdit(Request $request) {
         $this->validate($request, [
             'title' => 'required|min:5',
             'content' => 'required|min:10'
@@ -60,5 +58,11 @@ class PostController extends Controller
         $post->save();
         return redirect()->route('admin.index')->with('info', 'Post edited, new Title is: '
             . $request->input('title'));
+    }
+
+    public function getAdminDelete($id) {
+        $post = Post::find($id);
+        $post->delete();
+        return redirect()->route('admin.index')->with('info', 'Post deleted!');
     }
 }
